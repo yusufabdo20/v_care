@@ -19,6 +19,7 @@ class VCareApp extends StatelessWidget {
   /// parameter is set to the [onGenerateRoute] function of the [appRouters]
   /// instance.
   @override
+
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
@@ -27,13 +28,14 @@ class VCareApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'V-Care App',
         theme: ThemeData(
-            // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-            primaryColor: AppColors.primaryColor,
-            scaffoldBackgroundColor: AppColors.backgroundColor),
+          // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+          primaryColor: AppColors.primaryColor,
+          scaffoldBackgroundColor: Colors.white,
+        ),
         onGenerateRoute: appRouters.generateRoute,
         initialRoute: Routes.onBoardingScreen,
-      ), 
+      ),
     );
   }
 }

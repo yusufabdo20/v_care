@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:v_care/core/widgets/app_logo_image_widget.dart';
 
 import '../../auth/presentation/views/login/login_view.dart';
 
@@ -40,9 +42,14 @@ class _OnBoardingViewState extends State<OnBoardingView> {
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
-        child: Column(children: [
-          
-        ]),
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.all(30.0.h),
+            child: Column(children: [
+              AppLogoImageWidget(),
+            ]),
+          ),
+        ),
       )),
     );
   }
