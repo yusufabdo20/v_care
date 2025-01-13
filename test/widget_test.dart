@@ -7,6 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:v_care/core/routes/app_router.dart';
 
 import 'package:v_care/main.dart';
 import 'package:v_care/v_care_app.dart';
@@ -14,7 +15,9 @@ import 'package:v_care/v_care_app.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const VCareApp());
+    await tester.pumpWidget(VCareApp(
+      appRouters: AppRouters(),
+    ));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
