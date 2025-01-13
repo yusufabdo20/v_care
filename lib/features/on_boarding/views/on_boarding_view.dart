@@ -38,64 +38,12 @@ class _OnBoardingViewState extends State<OnBoardingView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          PageView(
-            onPageChanged: (index) {
-              setState(() {
-                _currentPage = index;
-              });
-            },
-            children: _pages,
-          ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextButton(
-                  onPressed: () {
-                    if (_currentPage > 0) {
-                      setState(() {
-                        _currentPage--;
-                      });
-                    }
-                  },
-                  child: const Text(
-                    'Previous',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    if (_currentPage < _pages.length - 1) {
-                      setState(() {
-                        _currentPage++;
-                      });
-                    } else {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) =>  LoginView(),
-                        ),
-                      );
-                    }
-                  },
-                  child: Text(
-                    _currentPage == _pages.length - 1 ? 'Get Started' : 'Next',
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+      body: SafeArea(
+          child: SingleChildScrollView(
+        child: Column(children: [
+          
+        ]),
+      )),
     );
   }
 }
