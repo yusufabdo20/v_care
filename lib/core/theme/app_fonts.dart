@@ -33,4 +33,3 @@ class AppFonts {
     fontSize: 12.0,
   );
 }
-

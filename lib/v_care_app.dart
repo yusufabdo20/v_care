@@ -19,7 +19,6 @@ class VCareApp extends StatelessWidget {
   /// parameter is set to the [onGenerateRoute] function of the [appRouters]
   /// instance.
   @override
-
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(375, 812),

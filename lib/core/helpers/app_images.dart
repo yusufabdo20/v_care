@@ -7,4 +7,3 @@ class AppImages {
   static const String googleIcon = 'assets/images/google_icon.png';
   static const String facebookIcon = 'assets/images/facebook_icon.png';
 }
-

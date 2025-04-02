@@ -14,12 +14,13 @@ class Routes {
   static const String changeLanguageScreen = '/changeLanguageScreen';
   static const String changeThemeScreen = '/changeThemeScreen';
   static const String changeNotificationScreen = '/changeNotificationScreen';
-  static const String changePasswordSuccessScreen = '/changePasswordSuccessScreen';
-  static const String forgotPasswordSuccessScreen = '/forgotPasswordSuccessScreen';
+  static const String changePasswordSuccessScreen =
+      '/changePasswordSuccessScreen';
+  static const String forgotPasswordSuccessScreen =
+      '/forgotPasswordSuccessScreen';
   static const String signUpSuccessScreen = '/signUpSuccessScreen';
   static const String verifyEmailSuccessScreen = '/verifyEmailSuccessScreen';
   static const String verifyPhoneSuccessScreen = '/verifyPhoneSuccessScreen';
   static const String verifyOtpSuccessScreen = '/verifyOtpSuccessScreen';
   static const String homeDetailScreen = '/homeDetailScreen';
-
 }

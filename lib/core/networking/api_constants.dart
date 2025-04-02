@@ -8,6 +8,7 @@ class ApiConstants {
   static const String register = 'auth/register';
   static const String logout = 'auth/logout';
 }
+
 class ApiErrors {
   static const String badRequestError = "badRequestError";
   static const String noContent = "noContent";
