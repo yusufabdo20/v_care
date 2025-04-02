@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:v_care/core/helpers/app_images.dart';
 
 class AppLogoImageWidget extends StatelessWidget {
   final double height;
@@ -8,7 +9,7 @@ class AppLogoImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      'assets/images/V-Care.png',
+      AppImages.logo,
       height: height,
     );
   }
