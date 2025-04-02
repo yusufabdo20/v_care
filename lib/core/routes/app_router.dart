@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:v_care/core/routes/routes.dart';
 
-import '../../features/auth/presentation/views/login/login_view.dart';
+import '../../features/auth/login/presentation/views/login/login_view.dart';
 import '../../features/on_boarding/views/on_boarding_view.dart';
 
 class AppRouters {
