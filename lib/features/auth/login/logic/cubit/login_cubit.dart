@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:v_care/features/auth/login/data/models/login_request_body.dart';
 
@@ -7,7 +8,12 @@ import 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   final LoginRepo _loginRepo;
+
   LoginCubit(this._loginRepo) : super(const LoginState.initial());
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+
   void emitLoginStates(LoginRequestBody loginRequestBody) async {
     emit(LoginState.loading());
     final response = await _loginRepo.login(loginRequestBody);

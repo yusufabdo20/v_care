@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:v_care/features/auth/login/presentation/views/login/widgets/email_and_pass.dart' show EmailAndPassword;
 
 class LoginView extends StatelessWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -13,25 +14,8 @@ class LoginView extends StatelessWidget {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Email',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            SizedBox(height: 20),
-            TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Password',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text('Login'),
-            ),
+            const EmailAndPassword(), 
+            
           ],
         ),
       ),

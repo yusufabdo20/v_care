@@ -33,7 +33,7 @@ class VCareApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
         ),
         onGenerateRoute: appRouters.generateRoute,
-        initialRoute: Routes.onBoardingScreen,
+        initialRoute: Routes.loginScreen,
       ),
     );
   }
