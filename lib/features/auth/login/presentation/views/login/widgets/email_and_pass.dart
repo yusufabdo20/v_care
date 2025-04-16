@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:v_care/core/widgets/app_text_form_field.dart';
+
+import '../../../../logic/cubit/login_cubit.dart';
 
 class EmailAndPassword extends StatefulWidget {
   const EmailAndPassword({super.key});
@@ -8,8 +12,8 @@ class EmailAndPassword extends StatefulWidget {
 }
 
 class _EmailAndPasswordState extends State<EmailAndPassword> {
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  late TextEditingController emailController;
+  late TextEditingController passwordController;
   bool _obscureText = true;
   void _togglePasswordVisibility() {
     setState(() {
@@ -19,12 +23,8 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
 
   @override
   void initState() {
-    _passwordController.addListener(() {
-      setState(() {});
-    });
-    _emailController.addListener(() {
-      setState(() {});
-    }); 
+    passwordController = context.read<LoginCubit>().passwordController;
+    emailController = context.read<LoginCubit>().emailController;
     super.initState();
   }
 
@@ -33,27 +33,47 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
     return Form(
         child: Column(
       children: [
-        TextField(
-          decoration: InputDecoration(
-            labelText: 'Email',
-            border: OutlineInputBorder(),
+        AppTextFormField(
+          
+          hintText: 'Email',
+          controller: emailController,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please enter your email';
+            }
+            return null;
+          },
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 18,
           ),
         ),
-        SizedBox(height: 20),
-        TextField(
-          obscureText: true,
-          decoration: InputDecoration(
-            labelText: 'Password',
-            suffixIcon: IconButton(
-              icon: _obscureText
-                  ? Icon(Icons.visibility)
-                  : Icon(Icons.visibility_off),
-              onPressed: () {
-                _togglePasswordVisibility();
-              },
+        const SizedBox(
+          height: 20,
+        ),
+        AppTextFormField(
+          hintText: 'Password',
+          controller: passwordController,
+          isObscureText: _obscureText,
+          suffixIcon: IconButton(
+            icon: Icon(
+              _obscureText ? Icons.visibility : Icons.visibility_off,
             ),
-            border: OutlineInputBorder(),
+            onPressed: _togglePasswordVisibility,
           ),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please enter your password';
+            }
+            return null;
+          },
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 18,
+          ),
+        ),
+        const SizedBox(
+          height: 20,
         ),
       ],
     ));

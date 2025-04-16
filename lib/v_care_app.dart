@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:v_care/core/routes/app_router.dart';
-import 'package:v_care/core/theme/app_colors.dart';
+import 'package:v_care/core/theme/colors_manager.dart';
 
 import 'core/routes/routes.dart';
 
@@ -29,7 +29,7 @@ class VCareApp extends StatelessWidget {
         theme: ThemeData(
           // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
-          primaryColor: AppColors.primaryColor,
+          primaryColor: ColorsManager.mainBlue,
           scaffoldBackgroundColor: Colors.white,
         ),
         onGenerateRoute: appRouters.generateRoute,
