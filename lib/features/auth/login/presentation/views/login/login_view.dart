@@ -16,52 +16,52 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Login'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Welcome Back',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black,
-                ),
-              ),
-              hSpace(10),
-              const Text(
-                'Login to your account',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
-                  color: ColorsManager.gray,
-                ),
-              ),
 
-              hSpace(20),
-              const EmailAndPassword(),
-              hSpace(20),
-              getForgotPasswordButton(),
-              hSpace(20),
-              getLoginButton(context),
-              hSpace(20),
-              const Text(
-                'Or',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: ColorsManager.gray,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Welcome Back',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
-              // dont have account ?  SignUpButton
-              getSignUpButton(),
-              LoginBlocListener(),
-            ],
+                hSpace(10),
+                const Text(
+                  'Login to your account',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                    color: ColorsManager.gray,
+                  ),
+                ),
+        
+                hSpace(20),
+                const EmailAndPassword(),
+                hSpace(20),
+                getForgotPasswordButton(),
+                hSpace(20),
+                getLoginButton(context),
+                hSpace(20),
+                const Text(
+                  'Or',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: ColorsManager.gray,
+                  ),
+                ),
+                // dont have account ?  SignUpButton
+                getSignUpButton(),
+                LoginBlocListener(),
+              ],
+            ),
           ),
         ),
       ),

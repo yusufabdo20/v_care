@@ -4,6 +4,7 @@ import 'package:v_care/core/helpers/sapcing.dart';
 import 'package:v_care/core/theme/colors_manager.dart';
 import 'package:v_care/core/widgets/app_text_form_field.dart';
 
+import '../../../../../../../core/helpers/app_regex.dart';
 import '../../../../logic/cubit/login_cubit.dart';
 import 'password_validation.dart';
 
@@ -15,7 +16,6 @@ class EmailAndPassword extends StatefulWidget {
 }
 
 class _EmailAndPasswordState extends State<EmailAndPassword> {
-  late TextEditingController emailController;
   late TextEditingController passwordController;
   bool _obscureText = true;
   bool hasLowerCase = false;
@@ -23,6 +23,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
   bool hasSpecialChar = false;
   bool hasNumber = false;
   bool hasMinLength = false;
+  bool isEmailValid = false;
 
   void _togglePasswordVisibility() {
     setState(() {
@@ -33,8 +34,14 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
   @override
   void initState() {
     passwordController = context.read<LoginCubit>().passwordController;
-    emailController = context.read<LoginCubit>().emailController;
+    setUpPasswordControllerListener();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    passwordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -44,60 +51,9 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Column(
           children: [
-            AppTextFormField(
-              hintText: 'Email',
-              inputTextStyle: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: ColorsManager.gray,
-              ),
-              hintStyle: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: Colors.black,
-              ),
-              controller: context.read<LoginCubit>().emailController,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your email';
-                }
-                return null;
-              },
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 18,
-              ),
-              backgroundColor: ColorsManager.moreLightGray,
-            ),
+            email(context),
             hSpace(24),
-            AppTextFormField(
-              hintText: 'Password',
-              controller: context.read<LoginCubit>().passwordController,
-              isObscureText: _obscureText,
-              suffixIcon: IconButton(
-                icon: Icon(
-                  _obscureText ? Icons.visibility : Icons.visibility_off,
-                  color: ColorsManager.mainBlue,
-
-                ),
-                onPressed: _togglePasswordVisibility,
-              ),  hintStyle: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: Colors.black,
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your password';
-                }
-                return null;
-              },
-              backgroundColor: ColorsManager.lighterGray,
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 18,
-              ),
-            ),
+            password(context),
             hSpace(24),
             PasswordValidation(
               hasLowerCase: hasLowerCase,
@@ -108,5 +64,76 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
             ),
           ],
         ));
+  }
+
+  AppTextFormField password(BuildContext context) {
+    return AppTextFormField(
+      hintText: 'Password',
+      controller: context.read<LoginCubit>().passwordController,
+      isObscureText: _obscureText,
+      suffixIcon: IconButton(
+        icon: Icon(
+          _obscureText ? Icons.visibility : Icons.visibility_off,
+          color: ColorsManager.mainBlue,
+        ),
+        onPressed: _togglePasswordVisibility,
+      ),
+      hintStyle: const TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        color: Colors.black,
+      ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter your password';
+        }
+        return null;
+      },
+      backgroundColor: ColorsManager.lighterGray,
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 18,
+      ),
+    );
+  }
+
+  AppTextFormField email(BuildContext context) {
+    return AppTextFormField(
+      hintText: 'Email',
+      inputTextStyle: const TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        color: ColorsManager.gray,
+      ),
+      hintStyle: const TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        color: Colors.black,
+      ),
+      controller: context.read<LoginCubit>().emailController,
+      validator: (value) {
+        if (value == null || value.isEmpty || !AppRegex.isEmailValid(value)) {
+          return 'Please enter valid email';
+        }
+        return null;
+      },
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 18,
+      ),
+      backgroundColor: ColorsManager.moreLightGray,
+    );
+  }
+
+  void setUpPasswordControllerListener() {
+    passwordController.addListener(() {
+      setState(() {
+        hasLowerCase = AppRegex.isLowerCase(passwordController.text);
+        hasUpperCase = AppRegex.isUpperCase(passwordController.text);
+        hasSpecialChar = AppRegex.isSpecialChar(passwordController.text);
+        hasNumber = AppRegex.isNumber(passwordController.text);
+        hasMinLength = AppRegex.isMinLength(passwordController.text);
+      });
+    });
   }
 }
