@@ -5,6 +5,7 @@ import 'package:v_care/core/routes/routes.dart';
 import 'package:v_care/features/auth/login/logic/cubit/login_cubit.dart';
 
 import '../../features/auth/login/presentation/views/login/login_view.dart';
+import '../../features/home/presentation/views/home_screen.dart';
 import '../../features/on_boarding/views/on_boarding_view.dart';
 
 class AppRouters {
@@ -18,6 +19,9 @@ class AppRouters {
                   create: (context) => getIt<LoginCubit>(),
                   child: LoginView(),
                 ));
+      case Routes.homeScreen:
+        return MaterialPageRoute(
+            builder: (context) => HomeScreen());
       default:
         return MaterialPageRoute(
             builder: (context) => Scaffold(
