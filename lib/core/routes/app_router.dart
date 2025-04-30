@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:v_care/core/di/di.dart';
 import 'package:v_care/core/routes/routes.dart';
 import 'package:v_care/features/auth/login/logic/cubit/login_cubit.dart';
+import 'package:v_care/features/auth/signup/presentation/views/signup_screen.dart';
 
 import '../../features/auth/login/presentation/views/login/login_view.dart';
 import '../../features/home/presentation/views/home_screen.dart';
@@ -22,6 +23,9 @@ class AppRouters {
       case Routes.homeScreen:
         return MaterialPageRoute(
             builder: (context) => HomeScreen());
+      case Routes.signUpScreen:
+        return MaterialPageRoute(
+            builder: (context) => SignupScreen());
       default:
         return MaterialPageRoute(
             builder: (context) => Scaffold(

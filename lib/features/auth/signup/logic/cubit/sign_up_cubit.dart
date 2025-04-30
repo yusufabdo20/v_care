@@ -12,14 +12,24 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController nameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController passwordConfirmationController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
   // Method to emit different states based on the sign-up process
-  void emitSignUpStates(SignUpRequestBody signUpRequestBody) async {
+  void emitSignUpStates() async {
     emit(SignUpState.loading());
-    final response = await _signUpRepo.signUp(signUpRequestBody);
+    final response = await _signUpRepo.signUp(
+      SignUpRequestBody(
+        email: emailController.text,
+        name: nameController.text,
+        phone: phoneController.text,
+        password: passwordController.text,
+        passwordConfirmation: passwordConfirmationController.text,
+        gender: 0
+      ),
+    );
     response.when(
       success: (data) {
         emit(SignUpState.success(data));
