@@ -43,6 +43,10 @@ class SignupScreen extends StatelessWidget {
               validator: (value) {},
             ),
             AppTextFormField(
+              hintText: "phone number",
+              validator: (value) {},
+            ),
+            AppTextFormField(
               hintText: "password",
               isObscureText: true,
               validator: (value) {},
@@ -52,7 +56,7 @@ class SignupScreen extends StatelessWidget {
               isObscureText: true,
               validator: (value) {},
             ),
-            
+
           ],
         ),
       )),
