@@ -27,4 +27,12 @@ extension NavigationExtension on BuildContext {
         MaterialPageRoute(builder: (context) => page),
         (Route<dynamic> route) => false);
   }
+  void pushNamedAndRemoveUntil(String routeName,
+      {Object? arguments}) {
+    Navigator.pushNamedAndRemoveUntil(
+        this,
+     routeName,
+        arguments: arguments,
+        (Route<dynamic> route) => false);
+  }
 }

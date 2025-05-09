@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:v_care/core/helpers/extentions/navigate_extention.dart';
 import 'package:v_care/core/helpers/sapcing.dart';
 import 'package:v_care/core/theme/colors_manager.dart';
 import 'package:v_care/core/widgets/app_text_button.dart';
@@ -7,6 +8,7 @@ import 'package:v_care/features/auth/login/logic/cubit/login_cubit.dart';
 import 'package:v_care/features/auth/login/presentation/views/login/widgets/email_and_pass.dart'
     show EmailAndPassword;
 
+import '../../../../../../core/routes/routes.dart';
 import '../../../data/models/login_request_body.dart';
 import 'widgets/login_bloc_listener.dart';
 
@@ -49,16 +51,19 @@ class LoginView extends StatelessWidget {
                 hSpace(20),
                 getLoginButton(context),
                 hSpace(20),
-                const Text(
-                  'Or',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: ColorsManager.gray,
+                Align(
+                  alignment: Alignment.center,
+                  child: const Text(
+                    'Or',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: ColorsManager.gray,
+                    ),
                   ),
                 ),
                 // dont have account ?  SignUpButton
-                getSignUpButton(),
+                getSignUpButton( context),
                 LoginBlocListener(),
               ],
             ),
@@ -87,7 +92,7 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  SizedBox getSignUpButton() {
+  SizedBox getSignUpButton(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       child: AppTextButton(
@@ -101,7 +106,9 @@ class LoginView extends StatelessWidget {
         horizontalPadding: 0,
         verticalPadding: 0,
         buttonWidth: double.infinity,
-        onPressed: () {},
+        onPressed: () {
+          context.pushNamed(Routes.signUpScreen);
+        },
       ),
     );
   }
