@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:v_care/core/helpers/extentions/navigate_extention.dart';
 import 'package:v_care/core/helpers/sapcing.dart';
@@ -6,6 +7,7 @@ import 'package:v_care/core/routes/routes.dart';
 import 'package:v_care/core/theme/colors_manager.dart';
 import 'package:v_care/core/widgets/app_text_button.dart';
 import 'package:v_care/core/widgets/app_text_form_field.dart';
+import 'package:v_care/features/auth/signup/logic/cubit/sign_up_cubit.dart';
 import 'package:v_care/features/auth/signup/presentation/widgets/sign_up_form.dart';
 import 'package:v_care/features/auth/signup/presentation/widgets/signup_bloc_listner.dart';
 
@@ -41,13 +43,49 @@ class SignupScreen extends StatelessWidget {
               hSpace(20),
               // Add your signup form fields here
            SignUpForm(),
+           getSignUpButton(context),
+           
           getLoginButton(context), 
+
           SignUpBlocListener() , 
             ],
           ),
         ),
       )),
     );
+  }
+    SizedBox getSignUpButton(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: AppTextButton(
+          buttonText: "SignUp",
+          textStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
+          backgroundColor: ColorsManager.mainBlue,
+          horizontalPadding: 20,
+          verticalPadding: 10,
+          buttonHeight: 50,
+          buttonWidth: double.infinity,
+          onPressed: () {
+            validateThenSignUp(context);
+          }),
+    );
+  }
+    void validateThenSignUp(BuildContext context) {
+    if (context.read<SignUpCubit>().formKey.currentState!.validate()) {
+      context.read<SignUpCubit>().emitSignUpStates();
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please fill in all fields correctly.'),
+          backgroundColor: Colors.red,
+          duration: Duration(seconds: 2),
+        ),
+      );
+    }
   }
   SizedBox getLoginButton(BuildContext context) {
     return SizedBox(
@@ -64,7 +102,7 @@ class SignupScreen extends StatelessWidget {
         verticalPadding: 0,
         buttonWidth: double.infinity,
         onPressed: () {
-          context.pushNamed(Routes.signUpScreen);
+          context.pushNamedAndRemoveUntil(Routes.loginScreen);
         },
       ),
     );

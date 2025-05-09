@@ -23,3 +23,4 @@ Future<void> setupGetIt() async {
       () => SignUpRepo(apiService: getIt<ApiService>()));
   getIt.registerFactory<SignUpCubit>(() => SignUpCubit(getIt<SignUpRepo>()));
 }
+ 
