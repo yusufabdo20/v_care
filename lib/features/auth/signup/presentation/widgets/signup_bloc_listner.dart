@@ -27,11 +27,7 @@ class SignUpBlocListener extends StatelessWidget {
           },
           success: (signUpResponse) {
             // Handle success state
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Signup successful: $signUpResponse')),
-            );
-              context.pop() ; 
-            context.pushNamed(Routes.homeScreen);
+          setupSuccessState(context) ;
           },
           failure: (error) {
             setupErrorState(context, error);
@@ -52,6 +48,27 @@ class SignUpBlocListener extends StatelessWidget {
                 Icon(Icons.error, color: Colors.red),
                 const Text('An error occurred during SignUp.'),
                 Text(error.toString()),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          ));
+  }
+  Future<dynamic> setupSuccessState(BuildContext context) {
+    return showDialog(context: context, builder: (_) => AlertDialog(
+            title: const Text('Congratulations!'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.check_circle, color: Colors.green),
+                const Text('Congratulations! You have successfully signed up.'),
+              
               ],
             ),
             actions: [

@@ -20,14 +20,14 @@ class SignUpCubit extends Cubit<SignUpState> {
   // Method to emit different states based on the sign-up process
   void emitSignUpStates() async {
     emit(SignUpState.loading());
-    final response = await _signUpRepo.signUp(
+    final  response = await _signUpRepo.signUp(
       SignUpRequestBody(
         email: emailController.text,
         name: nameController.text,
         phone: phoneController.text,
         password: passwordController.text,
         passwordConfirmation: passwordConfirmationController.text,
-        gender: 0
+        gender: "0"
       ),
     );
     response.when(

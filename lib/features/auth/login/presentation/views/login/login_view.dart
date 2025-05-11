@@ -9,6 +9,7 @@ import 'package:v_care/features/auth/login/presentation/views/login/widgets/emai
     show EmailAndPassword;
 
 import '../../../../../../core/routes/routes.dart';
+import '../../../../../../core/widgets/app_logo_image_widget.dart';
 import '../../../data/models/login_request_body.dart';
 import 'widgets/login_bloc_listener.dart';
 
@@ -26,6 +27,7 @@ class LoginView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Align(alignment: Alignment.center,child: AppLogoImageWidget(height: 80)),
                 const Text(
                   'Welcome Back',
                   style: TextStyle(

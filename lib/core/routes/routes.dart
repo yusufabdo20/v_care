@@ -19,7 +19,6 @@ class Routes {
       '/changePasswordSuccessScreen';
   static const String forgotPasswordSuccessScreen =
       '/forgotPasswordSuccessScreen';
-  static const String signUpSuccessScreen = '/signUpSuccessScreen';
   static const String verifyEmailSuccessScreen = '/verifyEmailSuccessScreen';
   static const String verifyPhoneSuccessScreen = '/verifyPhoneSuccessScreen';
   static const String verifyOtpSuccessScreen = '/verifyOtpSuccessScreen';
