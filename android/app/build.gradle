@@ -48,7 +48,7 @@ android {
     productFlavors {
         development {
             dimension "default"
-            applicationIdSuffix ".development"
+            // applicationIdSuffix ".development"
             resValue "string", "app_name", "V-Care (Development)"
         }
         production {
