@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:v_care/core/di/di.dart';
 import 'package:v_care/core/routes/routes.dart';
+import 'package:v_care/features/auth/login/logic/cubit/login_cubit.dart';
+import 'package:v_care/features/auth/signup/logic/cubit/sign_up_cubit.dart';
+import 'package:v_care/features/auth/signup/presentation/views/signup_screen.dart';
 
 import '../../features/auth/login/presentation/views/login/login_view.dart';
+import '../../features/home/presentation/views/home_screen.dart';
 import '../../features/on_boarding/views/on_boarding_view.dart';
 
 class AppRouters {
@@ -10,7 +16,19 @@ class AppRouters {
       case Routes.onBoardingScreen:
         return MaterialPageRoute(builder: (context) => OnBoardingView());
       case Routes.loginScreen:
-        return MaterialPageRoute(builder: (context) => LoginView());
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => getIt<LoginCubit>(),
+                  child: LoginView(),
+                ));
+      case Routes.homeScreen:
+        return MaterialPageRoute(builder: (context) => HomeScreen());
+      case Routes.signUpScreen:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) =>getIt<SignUpCubit>(),
+                  child: SignupScreen(),
+                ));
       default:
         return MaterialPageRoute(
             builder: (context) => Scaffold(
